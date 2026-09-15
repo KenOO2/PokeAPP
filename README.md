@@ -1,4 +1,4 @@
-# 🕹️ Pokédex 8-Bit — Optimización de Transferencia de Datos
+# 🕹️ Pokédex — Optimización de Transferencia de Datos
 
 Pokédex construida con **Next.js (App Router)**, **TypeScript** y **TanStack Query (React Query) v5**, pensada como ejercicio práctico de rendimiento web: precarga de datos, manejo de caché y sincronización servidor-cliente mediante hidratación, todo consumiendo la **PokéAPI**. La interfaz retoma la estética de las consolas de 8 bits (tipografía pixelada, bordes recortados en escalón y paneles tipo pantalla retro) como homenaje a los juegos clásicos de Pokémon.
 
@@ -38,7 +38,7 @@ La configuración vive en `app/providers.tsx` y responde a los objetivos de rend
 1. Entra a la carpeta del proyecto:
 
    ```bash
-   cd pokemon-app
+   cd Pokemon-app
    ```
 
 2. Levanta el servidor de desarrollo:
