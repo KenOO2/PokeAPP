@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ===== Paleta retro estilo cartucho Pokémon (Game Boy / consola de 8 bits) ===== */
+:root {
+  --background: #ffffff;
+  --foreground: #1e293b;
+
+  --pd-shell: #b91c1c;      /* rojo cartucho */
+  --pd-shell-dark: #7f1d1d;
+  --pd-shell-light: #ef4444;
+  --pd-screen: #0f172a;     /* "pantalla" oscura */
+  --pd-screen-alt: #111827;
+  --pd-accent-yellow: #facc15;
+  --pd-accent-cyan: #38bdf8;
+  --pd-line: #1e293b;
+  --pd-pixel-shadow: #000000;
+
+  --font-pixel-display: var(--font-press-start);
+  --font-pixel-body: var(--font-vt323);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-pixel: var(--font-pixel-display);
+  --font-retro: var(--font-pixel-body);
+}
+
+* {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-pixel-body), monospace;
+  position: relative;
+}
+
+/* Cuadrícula de píxeles + scanlines, como una pantalla retro encendida */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,  
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Fuente de títulos/etiquetas: la tipografía "pixelada" clásica de 8 bits */
+.font-pixel {
+  font-family: var(--font-pixel-display), monospace;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+/* Bordes recortados en escalones, como los cuadros de diálogo de los juegos antiguos */
+.pixel-corners {
+  clip-path: polygon(
+    0 8px, 8px 8px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+/* Sombra "pixel" de 3 capas, imitando el borde grueso de los sprites 8 bits */
+.pixel-border {
+  box-shadow:
+    0 0 0 2px var(--pd-pixel-shadow),
+    0 0 0 6px var(--pd-shell-dark),
+    4px 4px 0 6px rgba(0, 0, 0, 0.35);
+}
+
+.pixel-border-thin {
+  box-shadow:
+    0 0 0 3px var(--pd-pixel-shadow),
+    3px 3px 0 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Botón estilo consola: se "hunde" al presionar */
+.pixel-btn {
+  font-family: var(--font-pixel-display), monospace;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.45);
+}
+.pixel-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.45);
+}
+
+/* Parpadeo tipo cursor de consola, usado en textos de carga */
+@keyframes pixel-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.pixel-blink {
+  animation: pixel-blink 1s steps(1) infinite;
+}
+
+/* Barra de estadísticas segmentada en bloques, como el medidor de HP de los juegos */
+.pixel-bar-track {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0px,
+    rgba(0, 0, 0, 0.4) 1px,
+    transparent 1px,
+    transparent 7px
+  );
+}
